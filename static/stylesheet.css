@@ -1,0 +1,16 @@
+body {
+    background-color: antiquewhite;
+}
+
+h1 {
+    color: rgb(27, 15, 10)
+}
+
+a {
+    text-decoration: none;
+    color:cornflowerblue;
+}
+
+a:hover{
+    color: darkblue;
+}
