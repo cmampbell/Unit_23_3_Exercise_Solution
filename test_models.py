@@ -16,5 +16,5 @@ db.create_all()
 class UsersModelTestCase(TestCase):
     '''Tests for Users Model'''
 
-    
-
+class PostsModelTestCase(TestCase):
+    '''Tests for Post Model'''
