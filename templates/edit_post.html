@@ -9,7 +9,18 @@
   <label for="title">Title</label>
   <input type="text" name="title" id="title" placeholder="Post Title" value="{{post.title}}">
   <label for="content">Post Content</label>
-  <textarea name="content" id="content" placeholder="Write your post here" cols="20" rows="5">{{post.content}}</textarea>
+  <textarea name="content" id="content" placeholder="Write your post here" cols="20"
+    rows="5">{{post.content}}</textarea>
+  {% if all_tags[0] %}
+    {% for tag in all_tags %}
+      <label for="{{tag.id}}">{{tag.name}}</label>
+      {% if tag in current_tags %}
+        <input type="checkbox" id="{{tag.id}}" name="tags" value="{{tag.name}}" checked>
+      {% else %}
+        <input type="checkbox" id="{{tag.id}}" name="tags" value="{{tag.name}}">
+      {% endif %}
+    {% endfor %}
+  {% endif %}
   <input type="Submit" value="Save">
   <input type="Submit" value="Cancel" formaction="/posts/{{post.id}}" formmethod="GET">
 </form>

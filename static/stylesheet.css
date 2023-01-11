@@ -1,6 +1,19 @@
 body {
     background-color: antiquewhite;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
+
+#photo-buttons-posts{
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
 
 h1 {
     color: rgb(27, 15, 10)
@@ -13,4 +26,25 @@ a {
 
 a:hover{
     color: darkblue;
+}
+
+#user-posts {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+#user-name{
+    color: rgb(29, 29, 29);
+    align-items: flex-end;
+}
+
+#user-image{
+    max-height: 300px;
+    max-width: 300px;
+}
+
+#user-buttons{
+    border-style: none;
 }

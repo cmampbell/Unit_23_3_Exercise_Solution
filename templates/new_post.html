@@ -10,6 +10,15 @@
   <input type="text" name="title" id="title" placeholder="Post Title">
   <label for="content">Post Content</label>
   <textarea name="content" id="content" placeholder="Write your post here" cols="20" rows="5"></textarea>
+  <label for="tags">Add Tags!</label>
+  <fieldset>
+  {% if tags[0] %}
+    {% for tag in tags %}
+    <label for="{{tag.id}}">{{tag.name}}</label>
+    <input type="checkbox" id="{{tag.id}}" name="tags" value="{{tag.name}}">
+    {% endfor %}
+  {% endif %}
+</fieldset>
   <input type="Submit" value="Add">
   <input type="Submit" value="Cancel" formaction="/users/{{user.id}}" formmethod="GET">
 </form>

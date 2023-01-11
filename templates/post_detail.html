@@ -7,6 +7,14 @@
 <p class="content">{{post.content}}</p>
 <p class="by-line">By {{post.user.first_name}} {{post.user.last_name}}</p>
 <p class="date-time">Posted at {{post.created_at}}</p>
+<section class="tags">
+    <h3>Tags:</h3>
+    {% if tags[0] %}
+        {% for tag in tags %}
+        <div class="tag">{{tag.name}}</div>
+        {% endfor %}
+    {% endif %}
+</section>
 <form action="/posts/{{post.id}}/edit">
     <button type="submit">Edit</button>
     <button type="submit" formaction="/posts/{{post.id}}/delete" formmethod="POST">Delete</button>

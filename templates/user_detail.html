@@ -3,25 +3,29 @@
 {% block title %}{{user.first_name}} {{user.last_name}} Details{% endblock %}
 
 {% block content %}
-<img src="{{user.image_url}}" alt="A photo of {{user.first_name}} {{user.last_name}}">
-<h2>{{user.first_name}} {{user.last_name}}</h2>
-<form action="/users/{{user.id}}/edit">
-    <button type="submit">Edit</button>
-    <button type="submit" formaction="/users/{{user.id}}/delete" formmethod="POST">Delete</button>
-    <button type="submit" formaction="/">Home</button>
-</form>
+<h2 id="user-name">{{user.first_name}} {{user.last_name}}</h2>
+<section id="photo-buttons-posts">
+    <section id="photo-buttons">
+        <img id="user-image" src="{{user.image_url}}" alt="A photo of {{user.first_name}} {{user.last_name}}">
+        <form id="user-buttons" action="/users/{{user.id}}/edit">
+            <button type="submit">Edit</button>
+            <button type="submit" formaction="/users/{{user.id}}/delete" formmethod="POST">Delete</button>
+            <button type="submit" formaction="/">Home</button>
+        </form>
+    </section>
 
-<section>
-<h2>Posts</h2>
-<ul>
-    {% if posts[0] %}
-        {% for post in posts %}
+    <section id="user-posts">
+        <h2>Posts</h2>
+        <ul>
+            {% if posts[0] %}
+            {% for post in posts %}
             <li><a href="/posts/{{post.id}}">{{post.title}}</a></li>
-        {% endfor %}
-    {% endif %}
-</ul>
-<form action="/users/{{user.id}}/posts/new">
-    <button type="Submit">Add Post</button>
-</form>
+            {% endfor %}
+            {% endif %}
+        </ul>
+        <form action="/users/{{user.id}}/posts/new">
+            <button type="Submit">Add Post</button>
+        </form>
+    </section>
 </section>
 {% endblock %}

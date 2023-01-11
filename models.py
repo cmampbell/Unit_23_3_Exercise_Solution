@@ -15,14 +15,11 @@ class User(db.Model):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-
     first_name = db.Column(db.String, nullable=False)
-
     last_name = db.Column(db.String, nullable=False)
-
     image_url = db.Column(db.String, default=default_image)
 
-    posts = db.relationship('Post', backref='user', cascade="all,delete")
+    posts = db.relationship('Post', backref='user')
 
     def __repr__(self):
         '''Update representation of user class'''
@@ -35,19 +32,38 @@ class Post(db.Model):
     __tablename__ = 'posts'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-
     title = db.Column(db.String, nullable=False)
-
     content = db.Column(db.String, nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False) 
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='SET NULL'))
 
-    created_at = db.Column(db.DateTime) 
-
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    post_tag = db.relationship('PostTag', backref='post', passive_deletes=True)
+    tags = db.relationship('Tag', secondary='post_tags', backref='posts')
 
     def __repr__(self):
         '''Update representation of Post class'''
         p=self
         return f'<post_id= {p.id}, title={p.title}, content={p.content}, created_at={p.created_at}, user_id={p.user_id}'
 
+class Tag(db.Model):
+    '''Tag model'''
 
+    __tablename__ = 'tags'
 
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String, unique=True, nullable=False)
+
+    post_tag = db.relationship('PostTag', backref='tag', passive_deletes=True)
+
+    def __repr__(self):
+        '''Update representation of Tags class'''
+        t = self
+        return f'<tag_id={t.id}, tag_name={t.name}>'
+
+class PostTag(db.Model):
+    '''Post Tag many to many table Model'''
+
+    __tablename__ = 'post_tags'
+
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.id',  ondelete='CASCADE'), primary_key=True)
+    tag_id = db.Column(db.Integer, db.ForeignKey('tags.id', ondelete='CASCADE'), primary_key=True)

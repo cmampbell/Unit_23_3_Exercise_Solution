@@ -191,4 +191,3 @@ class PostsViewsTestCase(TestCase):
 
             self.assertEqual(resp.status_code, 200)
             self.assertEqual(len(Post.query.all()), 0)
-    
